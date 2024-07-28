@@ -32,17 +32,6 @@ const App = () => {
   return (
     <Router>
       <div className="container">
-        <div className="topbox">
-          <div className="box">
-            Cancel
-          </div>
-          <div className="box box2">
-            Hypermove Bot
-          </div>
-          <div className="box">
-            <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
-          </div>
-        </div>
         <Routes>
           <Route path="/" element={<ProtectedRoute element={<Home />} />} />
           <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
