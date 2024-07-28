@@ -116,10 +116,6 @@ const Home = () => {
                     <img src={LogoImg} alt="" />
                     <h6>{user}</h6>
                 </div>
-                <button className="Boost">
-                    <i className="fa fa-bolt"></i>
-                    <p>Boost</p>
-                </button>
             </div>
             <div className="section">
                 <div className="level">

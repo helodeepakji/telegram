@@ -14,7 +14,7 @@ route.get('/auth/:username/:id', async (req, res) => {
             console.error('Error fetching user:', error);
             return res.status(500).send('Internal Server Error');
         }
-        
+
         if (results.length === 0) {
             connection.query('INSERT INTO users (`user_id`, `username`) VALUES (?, ?)', [id, username], (insertError, insertResults, insertFields) => {
                 if (insertError) {
@@ -34,7 +34,7 @@ route.get('/auth/:username/:id', async (req, res) => {
 });
 
 route.get('/home', (req, res) => {
-    res.sendFile(path.join(process.cwd(),'build', 'index.html'));
+    res.sendFile(path.join(process.cwd(), 'build', 'index.html'));
 });
 
 route.get('/username', (req, res) => {
@@ -60,7 +60,7 @@ route.get('/api/addCoin/:coin', (req, res) => {
             }
             console.log('Coin inserted:', coin);
         });
-        res.json({username : req.session.username , id : req.session.user_id});
+        res.json({ username: req.session.username, id: req.session.user_id });
     } else {
         res.send('No session data found');
     }
@@ -77,7 +77,103 @@ route.get('/api/useEnergy/:coin', (req, res) => {
             }
             console.log('Coin inserted:', coin);
         });
-        res.json({username : req.session.username , id : req.session.user_id});
+        res.json({ username: req.session.username, id: req.session.user_id });
+    } else {
+        res.send('No session data found');
+    }
+});
+
+route.get('/api/getTask', (req, res) => {
+    if (req.session.username && req.session.user_id) {
+        const user_id = req.session.user_id;
+        connection.query('SELECT * FROM `task` ORDER BY `created_at` DESC', (error, results) => {
+            if (error) {
+                console.error('Error fetching tasks:', error);
+                return res.status(500).send('Internal Server Error');
+            }
+
+            let data = [];
+            results.forEach(element => {
+                let users;
+                if (element.users) {
+                    users = element.users;
+                } else {
+                    users = [];
+                }
+
+                // Ensure users is an array before using includes
+                if (Array.isArray(users) && users.includes(user_id)) {
+                    element.seen = true;
+                } else {
+                    element.seen = false;
+                }
+
+                data.push(element);
+            });
+
+            res.json(data);
+        });
+    } else {
+        res.status(401).send('No session data found');
+    }
+});
+
+route.get('/api/donTask/:id', (req, res) => {
+    const id = req.params.id;
+    if (req.session.username && req.session.user_id) {
+        var user_id = req.session.user_id;
+
+        connection.query('SELECT * FROM `task` WHERE `id` = ?', [id], (fetchError, results) => {
+            if (fetchError) {
+                console.error('Error fetching task:', fetchError);
+                return res.status(500).send('Error fetching task');
+            }
+
+            if (results.length === 0) {
+                return res.status(404).send('Task not found');
+            }
+
+            let task = results[0];
+            let users;
+
+            // Parse the users array
+            try {
+                users = JSON.parse(task.users) || [];
+            } catch (parseError) {
+                users = [];
+            }
+
+            // Add user_id to the users array if not already present
+            if (!users.includes(user_id)) {
+                users.push(user_id);
+
+                // Update the task with the new users array
+                connection.query('UPDATE `task` SET `users` = ? WHERE `id` = ?', [JSON.stringify(users), id], (updateError, updateResults) => {
+                    if (updateError) {
+                        console.error('Error updating task:', updateError);
+                        return res.status(500).send('Error updating task');
+                    }
+
+                    // add user coin
+
+                    const coin = task.coin; // Assuming task.coin contains the coin value to be added
+                    connection.query('UPDATE `users` SET `coin` = coin + ? WHERE `user_id` = ?', [coin, user_id], (coinUpdateError, coinUpdateResults) => {
+                        if (coinUpdateError) {
+                            console.error('Error updating user coins:', coinUpdateError);
+                            return res.status(500).send('Error updating user coins');
+                        }
+
+                        return res.json({ username: req.session.username, id: user_id, coins: coin });
+                    });
+
+                });
+            } else {
+                // User already in the users array
+                return res.json({ username: req.session.username, id: user_id });
+            }
+        });
+
+
     } else {
         res.send('No session data found');
     }
