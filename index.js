@@ -4,6 +4,7 @@ const app = express();
 const route = require('./router/route');
 const path = require('path');
 const {Telegraf} = require('telegraf');
+const connection = require('./db/connection');
 const port = process.env.PORT || 8000;
 
 const viewPath = path.join(__dirname,"/../views");
@@ -31,7 +32,7 @@ app.use('/',route);
 
 const token = "7222442007:AAHgTzuLS8O1Dgei8krt7yJ19Ii21DG_yI8";
 const web_link = "https://telegram-rp37.onrender.com/auth/";
-const bot = new Telegraf(token);
+let bot = new Telegraf(token);
 
 bot.start((ctx) => {
     var username = ctx.message.from.username;
@@ -46,6 +47,50 @@ bot.start((ctx) => {
 });
 
 bot.launch();
+
+let botRunning = true;
+
+async function initializeBot() {
+    if (botRunning) {
+        console.log('Stopping the running bot...');
+        await bot.stop();
+        botRunning = false;
+    }
+
+    bot = new Telegraf(token);
+
+    bot.start((ctx) => {
+        const username = ctx.message.from.username;
+        const user_id = ctx.message.from.id;
+        const url = `${web_link}${username}/${user_id}`;
+        console.log(url);
+        ctx.reply(`Welcome, @${username}`, {
+            reply_markup: {
+                keyboard: [[{ text: "Click For Play", web_app: { url: url } }]]
+            }
+        });
+    });
+
+    bot.launch()
+        .then(() => {
+            console.log('Bot started!');
+            botRunning = true;
+        })
+        .catch((error) => {
+            console.error('Error starting bot:', error);
+            botRunning = false;
+        });
+}
+
+app.get('/referral/:id', (req, res) => {
+    const id = req.params.id;
+    req.session.reffer = id;
+    initializeBot().then(() => {
+        res.send('Bot initialized with referral ID: ' + id);
+    }).catch((error) => {
+        res.status(500).send('Error initializing bot: ' + error.message);
+    });
+});
 
 app.listen(port,() => {
     console.log(`App is Started at http://127.0.0.1:${port}/`)

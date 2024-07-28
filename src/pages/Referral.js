@@ -21,7 +21,7 @@ const InviteFriends = () => {
       });
   }, []);
 
-  const textToCopy = 'https://telegram-rp37.onrender.com/auth/';
+  const textToCopy = 'https://telegram-rp37.onrender.com/referral/'+userid;
   const copyToClipboard = () => {
     navigator.clipboard.writeText(textToCopy).then(() => {
       alert('Text copied to clipboard');
