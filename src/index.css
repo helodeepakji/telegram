@@ -515,3 +515,52 @@ h4 {
     cursor: pointer;
     transition: all 0.3s ease; 
 }
+
+
+/* tasks */
+
+.referral-overlay {
+  max-width: 400px;
+  position: relative;
+  width: 100%;
+  background: linear-gradient(to right, #c464f9, #2c1b45);
+  background-color: #fff;
+  height: 92px;
+  border-radius: 20px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.tasks-card {
+  position: absolute;
+  max-width: 390px;
+  width: 100%;
+  background-color: #2c1b45;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50.8%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 20px;
+  height: 90px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.referral-container {
+  position: relative;
+}
+
+.tasks-card-coin-left {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.task-card-title {
+  font-size: 16px;
+}
