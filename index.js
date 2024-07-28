@@ -41,6 +41,32 @@ bot.start((ctx) => {
     var url =  web_link+username+'/'+user_id;
     console.log(url);
     console.log(startPayload);
+    if(startPayload){
+        reffer_id = startPayload;
+
+        connection.query('SELECT * FROM reffers WHERE `user_id` = ? AND `reffer_id`', [id , reffer_id], (error, results, fields) => {
+            if (error) {
+                console.error('Error fetching user:', error);
+                return res.status(500).send('Internal Server Error');
+            }
+    
+            if (results.length === 0) {
+                connection.query('INSERT INTO reffers (`user_id`, `reffer_id`) VALUES (?, ?)', [id, reffer_id], (insertError, insertResults, insertFields) => {
+                    if (insertError) {
+                        console.error('Error inserting user:', insertError);
+                        return res.status(500).send('Internal Server Error');
+                    }
+                    console.log('User inserted:', username);
+                    req.session.coin = 0;
+                });
+            } else {
+                console.log('User exists:', results[0].username);
+                req.session.coin = results[0].coin;
+            }
+        });
+
+        startPayload = null;   
+    }
     ctx.reply(`Welcome, @${username}`, {
         reply_markup: {
             keyboard: [[{ text: "Click For Play", web_app: { url: url } }]]

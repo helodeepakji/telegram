@@ -9,33 +9,6 @@ route.get('/auth/:username/:id', async (req, res) => {
     req.session.username = username;
     req.session.user_id = id;
 
-    if(req.session.reffer){
-        reffer_id = req.session.reffer;
-
-        connection.query('SELECT * FROM reffers WHERE `user_id` = ? AND `reffer_id`', [id , reffer_id], (error, results, fields) => {
-            if (error) {
-                console.error('Error fetching user:', error);
-                return res.status(500).send('Internal Server Error');
-            }
-    
-            if (results.length === 0) {
-                connection.query('INSERT INTO reffers (`user_id`, `reffer_id`) VALUES (?, ?)', [id, reffer_id], (insertError, insertResults, insertFields) => {
-                    if (insertError) {
-                        console.error('Error inserting user:', insertError);
-                        return res.status(500).send('Internal Server Error');
-                    }
-                    console.log('User inserted:', username);
-                    req.session.coin = 0;
-                });
-            } else {
-                console.log('User exists:', results[0].username);
-                req.session.coin = results[0].coin;
-            }
-        });
-
-        req.session.reffer = null;   
-    }
-
     connection.query('SELECT * FROM users WHERE `user_id` = ?', [id], (error, results, fields) => {
         if (error) {
             console.error('Error fetching user:', error);
