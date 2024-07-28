@@ -165,7 +165,7 @@ route.get('/api/donTask/:id', (req, res) => {
 
             // Parse the users array
             try {
-                users = JSON.parse(task.users) || [];
+                users = task.users || [];
             } catch (parseError) {
                 users = [];
             }
