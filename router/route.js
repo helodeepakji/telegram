@@ -217,11 +217,32 @@ route.get('/api/getTopReferral', (req, res) => {
 });
 
 route.get('/api/leaderboard', (req, res) => {
-    connection.query('SELECT * FROM users ORDER BY `coin` DESC LIMIT 10',(error, results, fields) => {
-        if (results) {
-            res.json(results);
-        }
-    });
+    if (req.session.username && req.session.user_id) {
+        let user;
+        connection.query('SELECT * FROM users WHERE `user_id` = ?',[req.session.user_id],(error, results, fields) => {
+            if (results) {
+                user = results[0];
+            }
+        });
+        connection.query('SELECT * FROM users ORDER BY `coin` DESC LIMIT 10',(error, topUsersResults, fields) => {
+            if (topUsersResults.length > 0) {
+                let inUser = true;
+                topUsersResults.forEach(element => {
+                    if(Number(element.user_id) == Number(req.session.user_id)){
+                        inUser = false;
+                    }
+                });
+
+                if(inUser){
+                    topUsersResults.push(user);
+                }
+
+                res.json(topUsersResults);
+            } else {
+                res.json([]);
+            }
+        });
+    }
 });
 
 module.exports = route;

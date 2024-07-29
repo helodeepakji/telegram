@@ -55,7 +55,7 @@ const Leaderboard = () => {
       </div>
       {leaders.map(value => (
         <div className="profile-card">
-          <div className="profile-item">
+          <div className={`profile-item ${value.user_id === userid ? 'myrank' : ''}`}>
             <div className="number">{++i}</div>
             <img src={profileImage} className="circular-image" alt="Profile" />
             <div className="profile-title">{value.username}</div>

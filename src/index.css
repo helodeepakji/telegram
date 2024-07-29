@@ -564,3 +564,8 @@ h4 {
 .task-card-title {
   font-size: 16px;
 }
+
+
+.myrank{
+  background: linear-gradient(180deg, #f84646cc 30%, #ff0000cc 60%, #a08b8bcc);
+}
