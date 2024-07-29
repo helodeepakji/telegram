@@ -36,6 +36,13 @@ const Leaderboard = () => {
   let i = 0;
 
   const textToCopy = 'https://t.me/Hypermovegamebot?start='+userid;
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      // alert('Text copied to clipboard');
+    }).catch(err => {
+      // console.error('Failed to copy text: ', err);
+    });
+  };
 
   return (
     <div className="container" style={{ padding: '10px', marginBottom: '100px' }}>
