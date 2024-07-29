@@ -86,7 +86,7 @@ route.get('/api/useEnergy/:coin', (req, res) => {
 route.get('/api/getTask', (req, res) => {
     if (req.session.username && req.session.user_id) {
         const user_id = req.session.user_id;
-        connection.query('SELECT * FROM `task` ORDER BY `created_at` DESC', (error, results) => {
+        connection.query('SELECT * FROM `task` WHERE `is_active` = 1 ORDER BY `created_at` DESC', (error, results) => {
             if (error) {
                 console.error('Error fetching tasks:', error);
                 return res.status(500).send('Internal Server Error');
@@ -165,6 +165,16 @@ route.get('/api/donTask/:id', (req, res) => {
 
                         return res.json({ username: req.session.username, id: user_id, coins: coin });
                     });
+
+
+                    // update wallet
+                    connection.query('INSERT INTO `wallet`(`user_id`, `coin`, `type`, `title`) VALUES (? , ? , ? , ?)', [user_id , coin , 'Task Complete' , task.id], (coinUpdateError, coinUpdateResults) => {
+                        if (coinUpdateError) {
+                            console.error('Error updating user coins:', coinUpdateError);
+                            return res.status(500).send('Error updating user coins');
+                        }
+                    });
+
 
                 });
             } else {

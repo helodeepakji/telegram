@@ -58,12 +58,27 @@ bot.start((ctx) => {
                                 console.error('Error inserting user:', insertError);
                                 return res.status(500).send('Internal Server Error');
                             }
-                            console.log('User inserted:', username);
-                            req.session.coin = 0;
+
+                            connection.query('UPDATE `users` SET `coin` = coin + ? WHERE `user_id` = ?', [200, reffer_id], (coinUpdateError, coinUpdateResults) => {
+                                if (coinUpdateError) {
+                                    console.error('Error updating user coins:', coinUpdateError);
+                                    return res.status(500).send('Error updating user coins');
+                                }
+
+                                return res.json({ username: req.session.username, id: user_id, coins: coin });
+                            });
+
+
+                            // update wallet
+                            connection.query('INSERT INTO `wallet`(`user_id`, `coin`, `type`, `title`) VALUES (? , ? , ? , ?)', [reffer_id, 200, 'Referral', user_id], (coinUpdateError, coinUpdateResults) => {
+                                if (coinUpdateError) {
+                                    console.error('Error updating user coins:', coinUpdateError);
+                                    return res.status(500).send('Error updating user coins');
+                                }
+                            });
                         });
                     } else {
                         console.log('User exists:', results[0].username);
-                        req.session.coin = results[0].coin;
                     }
                 });
             }
