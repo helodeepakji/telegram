@@ -68,8 +68,6 @@ bot.start((ctx) => {
                 });
             }
         });
-
-        startPayload = null;
     }
     ctx.reply(`Welcome, @${username}`, {
         reply_markup: {
