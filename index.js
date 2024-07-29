@@ -64,8 +64,6 @@ bot.start((ctx) => {
                                     console.error('Error updating user coins:', coinUpdateError);
                                     return res.status(500).send('Error updating user coins');
                                 }
-
-                                return res.json({ username: req.session.username, id: user_id, coins: coin });
                             });
 
 
