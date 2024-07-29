@@ -41,7 +41,7 @@ bot.start((ctx) => {
     var url = web_link + username + '/' + user_id;
     console.log(url);
     console.log(startPayload);
-    if (startPayload) {
+    if (startPayload && startPayload != user_id) {
         reffer_id = startPayload;
 
         connection.query('SELECT * FROM users WHERE `user_id` = ?', [user_id], (error, results, fields) => {
@@ -53,7 +53,7 @@ bot.start((ctx) => {
                     }
 
                     if (results.length === 0) {
-                        connection.query('INSERT INTO reffers (`user_id`, `reffer_id`) VALUES (?, ?)', [id, reffer_id], (insertError, insertResults, insertFields) => {
+                        connection.query('INSERT INTO reffers (`user_id`, `reffer_id`) VALUES (?, ?)', [user_id, reffer_id], (insertError, insertResults, insertFields) => {
                             if (insertError) {
                                 console.error('Error inserting user:', insertError);
                                 return res.status(500).send('Internal Server Error');
