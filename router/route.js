@@ -202,7 +202,7 @@ route.get('/api/getTopReferral', (req, res) => {
             let data = [];
             results.forEach(element => {
                 
-                connection.query('SELECT * FROM users WHERE `user_id` = ?', [req.session.user_id], (error, user, fields) => {
+                connection.query('SELECT * FROM users WHERE `user_id` = ?', [element.user_id], (error, user, fields) => {
                     if (user) {
                         element.user = user[0].username;
                     }
