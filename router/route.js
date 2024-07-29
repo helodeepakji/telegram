@@ -53,7 +53,7 @@ route.get('/api/addCoin/:coin', (req, res) => {
     const coin = req.params.coin;
     if (req.session.username && req.session.user_id) {
         var user_id = req.session.user_id;
-        connection.query('UPDATE `users` SET `coin` = ? WHERE `user_id` = ?', [coin, user_id], (insertError, insertResults, insertFields) => {
+        connection.query('UPDATE `users` SET `coin` = `coin` + 1 WHERE `user_id` = ?', [user_id], (insertError, insertResults, insertFields) => {
             if (insertError) {
                 console.error('Error inserting user:', insertError);
                 return res.status(500).send('Internal Server Error');
@@ -70,7 +70,7 @@ route.get('/api/useEnergy/:coin', (req, res) => {
     const coin = req.params.coin;
     if (req.session.username && req.session.user_id) {
         var user_id = req.session.user_id;
-        connection.query('UPDATE `users` SET `energy` = ? WHERE `user_id` = ?', [coin, user_id], (insertError, insertResults, insertFields) => {
+        connection.query('UPDATE `users` SET `energy` = `energy` - 1 WHERE `user_id` = ?', [ user_id], (insertError, insertResults, insertFields) => {
             if (insertError) {
                 console.error('Error inserting user:', insertError);
                 return res.status(500).send('Internal Server Error');
@@ -193,7 +193,16 @@ route.get('/api/donTask/:id', (req, res) => {
 route.get('/api/getTopReferral', (req, res) => {
     if (req.session.username && req.session.user_id) {
         const user_id = req.session.user_id;
-        connection.query(`SELECT wallet.user_id, COUNT(*) AS referral_count, SUM(wallet.coin) AS total_coin, MAX(users.username) AS username FROM wallet JOIN users ON wallet.user_id = users.user_id WHERE wallet.type = 'Referral' GROUP BY wallet.user_id ORDER BY referral_count DESC`, (error, results) => {
+        // connection.query(`SELECT wallet.user_id, COUNT(*) AS referral_count, SUM(wallet.coin) AS total_coin, MAX(users.username) AS username FROM wallet JOIN users ON wallet.user_id = users.user_id WHERE wallet.type = 'Referral' GROUP BY wallet.user_id ORDER BY referral_count DESC`, (error, results) => {
+        //     if (error) {
+        //         console.error('Error fetching tasks:', error);
+        //         return res.status(500).send('Internal Server Error');
+        //     }
+        
+        //     res.json(results);
+        // });
+        
+        connection.query(`SELECT * FROM wallet JOIN users ON wallet.title = users.user_id WHERE wallet.type = 'Referral' AND wallet.user_id = ?`, [user_id] ,(error, results) => {
             if (error) {
                 console.error('Error fetching tasks:', error);
                 return res.status(500).send('Internal Server Error');

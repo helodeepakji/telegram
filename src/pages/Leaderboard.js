@@ -53,7 +53,6 @@ const Leaderboard = () => {
         </div>
         <h2>Leaderboard</h2>
       </div>
-      <h4>Top Referrals</h4>
       {leaders.map(value => (
         <div className="profile-card">
           <div className="profile-item">
