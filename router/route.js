@@ -189,4 +189,34 @@ route.get('/api/donTask/:id', (req, res) => {
     }
 });
 
+
+route.get('/api/getTopReferral', (req, res) => {
+    if (req.session.username && req.session.user_id) {
+        const user_id = req.session.user_id;
+        connection.query("SELECT user_id, COUNT(*) AS referral_count, SUM(`coin`) AS total_coin FROM wallet WHERE type = 'Referral' GROUP BY user_id ORDER BY referral_count DESC", (error, results) => {
+            if (error) {
+                console.error('Error fetching tasks:', error);
+                return res.status(500).send('Internal Server Error');
+            }
+
+            let data = [];
+            results.forEach(element => {
+                
+                connection.query('SELECT * FROM users WHERE `user_id` = ?', [req.session.user_id], (error, user, fields) => {
+                    if (user) {
+                        element.user = user[0].username;
+                    }
+                });
+
+                data.push(element);
+            });
+
+            res.json(data);
+        });
+    } else {
+        res.status(401).send('No session data found');
+    }
+});
+
+
 module.exports = route;

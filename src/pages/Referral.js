@@ -5,6 +5,19 @@ import profileImage from '../assets/image.jpg'; // Adjust the path as needed
 const InviteFriends = () => {
   const [earned, setEarned] = useState(0);
   const [userid, setUserid] = useState(0);
+  const [referral, setReferral] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/getTopReferral')
+      .then(response => response.json())
+      .then(data => {
+        setReferral(data);
+      })
+      .catch(error => {
+        console.error('Error fetching tasks:', error);
+      });
+  }, []);
+
 
   useEffect(() => {
     console.log('start');
@@ -24,9 +37,9 @@ const InviteFriends = () => {
   const textToCopy = 'https://t.me/Hypermovegamebot?start='+userid;
   const copyToClipboard = () => {
     navigator.clipboard.writeText(textToCopy).then(() => {
-      alert('Text copied to clipboard');
+      // alert('Text copied to clipboard');
     }).catch(err => {
-      console.error('Failed to copy text: ', err);
+      // console.error('Failed to copy text: ', err);
     });
   };
 
@@ -67,57 +80,28 @@ const InviteFriends = () => {
         </div>
       </div>
       <h4>Top Referrals</h4>
+
+      {referral.map(task => (
       <div className="profile-card">
         <div className="profile-item">
           <div className="number">1</div>
           <img src={profileImage} className="circular-image" alt="Profile" />
-          <div className="profile-title">Lemmyux</div>
+          <div className="profile-title">{task.user}</div>
           <div className="right-content">
             <img src={coinImage} className="coin-image-card" alt="Coin" />
-            <span>49853416</span>
+            <span>{task.coin}</span>
           </div>
         </div>
       </div>
-      <div className="profile-card">
-        <div className="profile-item">
-          <div className="number">2</div>
-          <img src={profileImage} className="circular-image" alt="Profile" />
-          <div className="profile-title">Lemmyux</div>
-          <div className="right-content">
-            <img src={coinImage} className="coin-image-card" alt="Coin" />
-            <span>49853416</span>
-          </div>
-        </div>
-      </div>
-      <div className="profile-card">
-        <div className="profile-item">
-          <div className="number">3</div>
-          <img src={profileImage} className="circular-image" alt="Profile" />
-          <div className="profile-title">Lemmyux</div>
-          <div className="right-content">
-            <img src={coinImage} className="coin-image-card" alt="Coin" />
-            <span>49853416</span>
-          </div>
-        </div>
-      </div>
-      <div className="profile-card">
-        <div className="profile-item">
-          <div className="number">5</div>
-          <img src={profileImage} className="circular-image" alt="Profile" />
-          <div className="profile-title">Lemmyux</div>
-          <div className="right-content">
-            <img src={coinImage} className="coin-image-card" alt="Coin" />
-            <span>49853416</span>
-          </div>
-        </div>
-      </div>
+      ))}
+
       <h4><span style={{ color: '#ffc227' }}>0</span> Referrals Yet</h4>
       <div className="referral-card">
         <img src={coinImage} className="referral-card-coin-left" alt="Coin" />
         <div className="referral-card-content">
           <h1 className="referral-card-title">Invite a Friend</h1>
           <p className="referral-card-subtitle">
-            <span style={{ color: '#ffc227' }}>+2000 </span>for you when you invite a
+            <span style={{ color: '#ffc227' }}>+200 </span>for you when you invite a
             friend
           </p>
         </div>
@@ -141,7 +125,7 @@ const InviteFriends = () => {
             Invite a Friend With Telegram Premium
           </h1>
           <p className="referral-card-subtitle">
-            <span style={{ color: '#ffc227' }}>+2000 </span>for you when you invite a
+            <span style={{ color: '#ffc227' }}>+200 </span>for you when you invite a
             friend
           </p>
         </div>
