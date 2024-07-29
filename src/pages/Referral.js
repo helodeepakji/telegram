@@ -43,6 +43,8 @@ const InviteFriends = () => {
     });
   };
 
+  var i = 0;
+
   return (
     <div className="container" style={{ padding: '10px', marginBottom: '100px' }}>
       <div className="header-container">
@@ -84,12 +86,12 @@ const InviteFriends = () => {
       {referral.map(task => (
       <div className="profile-card">
         <div className="profile-item">
-          <div className="number">1</div>
+          <div className="number">{++i}</div>
           <img src={profileImage} className="circular-image" alt="Profile" />
-          <div className="profile-title">{task.user}</div>
+          <div className="profile-title">{task.username}</div>
           <div className="right-content">
             <img src={coinImage} className="coin-image-card" alt="Coin" />
-            <span>{task.coin}</span>
+            <span>{task.total_coin}</span>
           </div>
         </div>
       </div>
