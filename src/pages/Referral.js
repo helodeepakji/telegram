@@ -91,7 +91,7 @@ const InviteFriends = () => {
           <div className="profile-title">{task.username}</div>
           <div className="right-content">
             <img src={coinImage} className="coin-image-card" alt="Coin" />
-            <span>{task.total_coin}</span>
+            <span>{task.coin}</span>
           </div>
         </div>
       </div>

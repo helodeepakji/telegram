@@ -202,7 +202,7 @@ route.get('/api/getTopReferral', (req, res) => {
         //     res.json(results);
         // });
         
-        connection.query(`SELECT * FROM wallet JOIN users ON wallet.title = users.user_id WHERE wallet.type = 'Referral' AND wallet.user_id = ?`, [user_id] ,(error, results) => {
+        connection.query(`SELECT wallet.coin , users.username FROM wallet JOIN users ON wallet.title = users.user_id WHERE wallet.type = 'Referral' AND wallet.user_id = ?`, [user_id] ,(error, results) => {
             if (error) {
                 console.error('Error fetching tasks:', error);
                 return res.status(500).send('Internal Server Error');
