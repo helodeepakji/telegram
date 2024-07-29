@@ -207,5 +207,12 @@ route.get('/api/getTopReferral', (req, res) => {
     }
 });
 
+route.get('/api/leaderboard', (req, res) => {
+    connection.query('SELECT * FROM users ORDER BY `coin` DESC LIMIT 10',(error, results, fields) => {
+        if (results) {
+            res.json(results);
+        }
+    });
+});
 
 module.exports = route;
