@@ -64,20 +64,22 @@ const Home = () => {
     };
 
     const minusEnergy = async (coin) => {
-        try {
-            const response = await fetch(`/api/useEnergy/${coin}`, {
-                method: 'GET',
-                credentials: 'include'
-            });
-
-            if (response.ok) {
-                const result = await response.json();
-                console.log('Coin added:', result);
-            } else {
-                console.error('Error adding coin:', response.statusText);
+        if(coin >= 0){
+            try {
+                const response = await fetch(`/api/useEnergy/${coin}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+    
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Coin added:', result);
+                } else {
+                    console.error('Error adding coin:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error adding coin:', error);
             }
-        } catch (error) {
-            console.error('Error adding coin:', error);
         }
     };
 
