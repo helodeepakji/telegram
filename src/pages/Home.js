@@ -99,6 +99,7 @@ const Home = () => {
                 minusEnergy(newEnergy)
                 return newEnergy;
             });
+        }
             setEarned((prev) => {
                 const newEarned = prev + 1;
                 addCoin(newEarned);
@@ -107,7 +108,6 @@ const Home = () => {
             resetTimer();
             setShowAnimation(true);
             setTimeout(() => setShowAnimation(false), 500);
-        }
     };
 
 
