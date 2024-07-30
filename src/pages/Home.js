@@ -29,7 +29,6 @@ const Home = () => {
     const [showAnimation, setShowAnimation] = useState(false);
     const timerRef = useRef(null);
 
-
     const resetTimer = () => {
         if (timerRef.current) {
             clearTimeout(timerRef.current);
@@ -38,7 +37,7 @@ const Home = () => {
             if (energy < 500) {
                 setEnergy((prev) => {
                     const newEnergy = Math.min(prev + 1, 500);
-                    minusEnergy(newEnergy);
+                    addEnergy(newEnergy);
                     return newEnergy;
                 });
             }
@@ -82,6 +81,26 @@ const Home = () => {
             }
         }
     };
+    
+    const addEnergy = async (coin) => {
+        if(coin <= 500){
+            try {
+                const response = await fetch(`/api/addEnergy/${coin}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+    
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Coin added:', result);
+                } else {
+                    console.error('Error adding coin:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error adding coin:', error);
+            }
+        }
+    };
 
     useEffect(() => {
         resetTimer();
@@ -93,21 +112,23 @@ const Home = () => {
       }, [energy]);
 
     const handleClick = () => {
-        if (energy > 0) {
-            setEnergy((prev) => {
-                const newEnergy = prev - 1;
+        setEnergy((prev) => {
+            const newEnergy = prev - 1;
+            if (prev > 0) {
                 minusEnergy(newEnergy)
                 return newEnergy;
-            });
-        }
-            setEarned((prev) => {
-                const newEarned = prev + 1;
-                addCoin(newEarned);
-                return newEarned;
-            });
-            resetTimer();
-            setShowAnimation(true);
-            setTimeout(() => setShowAnimation(false), 500);
+            }else{
+                return 0;
+            }
+        });
+        setEarned((prev) => {
+            const newEarned = prev + 1;
+            addCoin(newEarned);
+            return newEarned;
+        });
+        resetTimer();
+        setShowAnimation(true);
+        setTimeout(() => setShowAnimation(false), 500);
     };
 
 

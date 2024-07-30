@@ -70,12 +70,43 @@ route.get('/api/useEnergy/:coin', (req, res) => {
     const coin = req.params.coin;
     if (req.session.username && req.session.user_id) {
         var user_id = req.session.user_id;
-        connection.query('UPDATE `users` SET `energy` = `energy` - 1 WHERE `user_id` = ?', [ user_id], (insertError, insertResults, insertFields) => {
-            if (insertError) {
-                console.error('Error inserting user:', insertError);
-                return res.status(500).send('Internal Server Error');
+        connection.query('SELECT * FROM users WHERE `user_id` = ?', [user_id], (error, results, fields) => {
+            if (results) {
+                var energy = results[0].energy;
+                if(energy > 0){
+                    connection.query('UPDATE `users` SET `energy` = `energy` - 1 WHERE `user_id` = ?', [ user_id], (insertError, insertResults, insertFields) => {
+                        if (insertError) {
+                            console.error('Error inserting user:', insertError);
+                            return res.status(500).send('Internal Server Error');
+                        }
+                        console.log('Coin inserted:', coin);
+                    });
+                }
             }
-            console.log('Coin inserted:', coin);
+        });
+        res.json({ username: req.session.username, id: req.session.user_id });
+    } else {
+        res.send('No session data found');
+    }
+});
+
+route.get('/api/addEnergy/:coin', (req, res) => {
+    const coin = req.params.coin;
+    if (req.session.username && req.session.user_id) {
+        var user_id = req.session.user_id;
+        connection.query('SELECT * FROM users WHERE `user_id` = ?', [user_id], (error, results, fields) => {
+            if (results) {
+                var energy = results[0].energy;
+                if(energy < 500){
+                    connection.query('UPDATE `users` SET `energy` = `energy` + 1 WHERE `user_id` = ?', [ user_id], (insertError, insertResults, insertFields) => {
+                        if (insertError) {
+                            console.error('Error inserting user:', insertError);
+                            return res.status(500).send('Internal Server Error');
+                        }
+                        console.log('Coin inserted:', coin);
+                    });
+                }
+            }
         });
         res.json({ username: req.session.username, id: req.session.user_id });
     } else {
@@ -188,7 +219,6 @@ route.get('/api/donTask/:id', (req, res) => {
         res.send('No session data found');
     }
 });
-
 
 route.get('/api/getTopReferral', (req, res) => {
     if (req.session.username && req.session.user_id) {
