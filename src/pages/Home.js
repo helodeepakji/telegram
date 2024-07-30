@@ -44,6 +44,18 @@ const Home = () => {
         }, 1000);
     };
 
+    const debounce = (func, delay) => {
+        let timeoutId;
+        return (...args) => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            timeoutId = setTimeout(() => {
+                func(...args);
+            }, delay);
+        };
+    };
+
     const addCoin = async (energy) => {
         try {
             const response = await fetch(`/api/addCoin/${energy}`, {
@@ -61,6 +73,8 @@ const Home = () => {
             console.error('Error adding coin:', error);
         }
     };
+
+    const debouncedAddCoin = debounce(addCoin, 300);
 
     const minusEnergy = async (coin) => {
         if(coin >= 0){
@@ -123,7 +137,7 @@ const Home = () => {
         });
         setEarned((prev) => {
             const newEarned = prev + 1;
-            addCoin(newEarned);
+            debouncedAddCoin(newEarned);
             return newEarned;
         });
         resetTimer();

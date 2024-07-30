@@ -143,8 +143,8 @@
 .Avtar {
   position: absolute;
   left: auto;
-  bottom: 45px;
-  width: 200px;
+  bottom: 25px;
+  width: 250px;
 }
 .nav {
   color: white;
@@ -267,6 +267,7 @@
   display: grid;
   justify-items: center;
   position: relative;
+  margin: 35px 0;
 }
 
 .moon-bunny img {
@@ -274,9 +275,9 @@
 }
 
 .center .coinimg {
-  height: 200px;
-  width: 200px;
-  margin: 60px;
+  height: 270px;
+  width: 270px;
+  margin: 30px;
 }
 
 
