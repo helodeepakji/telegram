@@ -570,3 +570,31 @@ h4 {
 .myrank{
   background: linear-gradient(180deg, #f84646cc 30%, #ff0000cc 60%, #a08b8bcc);
 }
+
+
+/* animation */
+
+.scaled {
+  transform: scale(0.9);
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.new-earnpoint {
+  position: absolute;
+  font-size: 20px; 
+  animation: fadeUp 1s ease-in-out forwards;
+  pointer-events: none; 
+  transition: transform 0.2s ease-in-out;
+  color: green;
+  font-weight: 800;
+}

@@ -10,6 +10,8 @@ const Home = () => {
     const [earned, setEarned] = useState(0);
     const [user, setUser] = useState('user');
 
+    const [animationPosition, setAnimationPosition] = useState({ x: 0, y: 0 });
+
     useEffect(() => {
         console.log('start');
         fetch('/username')
@@ -77,13 +79,13 @@ const Home = () => {
     const debouncedAddCoin = debounce(addCoin, 300);
 
     const minusEnergy = async (coin) => {
-        if(coin >= 0){
+        if (coin >= 0) {
             try {
                 const response = await fetch(`/api/useEnergy/${coin}`, {
                     method: 'GET',
                     credentials: 'include'
                 });
-    
+
                 if (response.ok) {
                     const result = await response.json();
                     console.log('Coin added:', result);
@@ -95,15 +97,15 @@ const Home = () => {
             }
         }
     };
-    
+
     const addEnergy = async (coin) => {
-        if(coin <= 500){
+        if (coin <= 500) {
             try {
                 const response = await fetch(`/api/addEnergy/${coin}`, {
                     method: 'GET',
                     credentials: 'include'
                 });
-    
+
                 if (response.ok) {
                     const result = await response.json();
                     console.log('Coin added:', result);
@@ -119,19 +121,19 @@ const Home = () => {
     useEffect(() => {
         resetTimer();
         return () => {
-          if (timerRef.current) {
-            clearTimeout(timerRef.current);
-          }
+            if (timerRef.current) {
+                clearTimeout(timerRef.current);
+            }
         };
-      }, [energy]);
+    }, [energy]);
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         setEnergy((prev) => {
             const newEnergy = prev - 1;
             if (prev > 0) {
                 minusEnergy(newEnergy)
                 return newEnergy;
-            }else{
+            } else {
                 return 0;
             }
         });
@@ -140,11 +142,24 @@ const Home = () => {
             debouncedAddCoin(newEarned);
             return newEarned;
         });
+
+
         resetTimer();
         setShowAnimation(true);
-        setTimeout(() => setShowAnimation(false), 500);
+
+        const rect = e.target.getBoundingClientRect();
+        setAnimationPosition({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+        });
+
+        setTimeout(() => setShowAnimation(false), 1000);
+
+        setIsScaled(true);
+        setTimeout(() => setIsScaled(false), 200);
     };
 
+    const [isScaled, setIsScaled] = useState(false);
 
     return (
         <div className="content container-sm">
@@ -168,16 +183,17 @@ const Home = () => {
                     <h3 id="point">{earned}</h3>
                 </div>
             </div>
-            <div className="center">
-            {showAnimation && (
-                <span className="new-earnpoint">+1</span>
-              )}
-                <img src={coinImag} className="coinimg" alt="" onClick={handleClick} />
-                <div id="shadow">
-
-                </div>
-                <img src={Avtar} className="Avtar" alt="" onClick={handleClick} />
+            <div className={`center ${isScaled ? "scaled" : ""}`} style={{ position: "relative" }}>
+                {showAnimation && (
+                    <span className="new-earnpoint" style={{ top: `${animationPosition.y}px`, left: `${animationPosition.x}px` }}>
+                        +1
+                    </span>
+                )}
+                <img src={coinImag} className="coinimg" alt="" onClick={handleClick} style={{ cursor: "pointer" }} />
+                <div id="shadow"></div>
+                <img src={Avtar} className="Avtar" alt="" onClick={handleClick} style={{ cursor: "pointer" }} />
             </div>
+
             <div className="pro-bar">
                 <div className="text">{energy} / 500 <img src={flash} alt="" /></div>
                 <div className="progress progress-striped">
