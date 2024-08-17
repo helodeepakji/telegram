@@ -47,32 +47,32 @@ bot.start((ctx) => {
         connection.query('SELECT * FROM users WHERE `user_id` = ?', [user_id], (error, results, fields) => {
             if (results.length === 0) {
                 connection.query('SELECT * FROM reffers WHERE `user_id` = ? AND `reffer_id`', [user_id, reffer_id], (error, results, fields) => {
-                    if (error) {
-                        console.error('Error fetching user:', error);
-                        return res.status(500).send('Internal Server Error');
-                    }
+                    // if (error) {
+                    //     console.error('Error fetching user:', error);
+                    //     return res.status(500).send('Internal Server Error');
+                    // }
 
                     if (results.length === 0) {
                         connection.query('INSERT INTO reffers (`user_id`, `reffer_id`) VALUES (?, ?)', [user_id, reffer_id], (insertError, insertResults, insertFields) => {
-                            if (insertError) {
-                                console.error('Error inserting user:', insertError);
-                                return res.status(500).send('Internal Server Error');
-                            }
+                            // if (insertError) {
+                            //     console.error('Error inserting user:', insertError);
+                            //     return res.status(500).send('Internal Server Error');
+                            // }
 
                             connection.query('UPDATE `users` SET `coin` = coin + ? WHERE `user_id` = ?', [200, reffer_id], (coinUpdateError, coinUpdateResults) => {
-                                if (coinUpdateError) {
-                                    console.error('Error updating user coins:', coinUpdateError);
-                                    return res.status(500).send('Error updating user coins');
-                                }
+                                // if (coinUpdateError) {
+                                //     console.error('Error updating user coins:', coinUpdateError);
+                                //     return res.status(500).send('Error updating user coins');
+                                // }
                             });
 
 
                             // update wallet
                             connection.query('INSERT INTO `wallet`(`user_id`, `coin`, `type`, `title`) VALUES (? , ? , ? , ?)', [reffer_id, 200, 'Referral', user_id], (coinUpdateError, coinUpdateResults) => {
-                                if (coinUpdateError) {
-                                    console.error('Error updating user coins:', coinUpdateError);
-                                    return res.status(500).send('Error updating user coins');
-                                }
+                                // if (coinUpdateError) {
+                                //     console.error('Error updating user coins:', coinUpdateError);
+                                //     return res.status(500).send('Error updating user coins');
+                                // }
                             });
                         });
                     } else {
