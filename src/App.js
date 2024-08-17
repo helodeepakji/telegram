@@ -13,6 +13,7 @@ import Referral from "./pages/Referral";
 import Bottom from "./components/Bottom";
 import Task from "./pages/Task";
 import Wallet from "./pages/Wallet";
+import Fight from "./pages/Fight";
 
 
 const tele = window.Telegram.WebApp;
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/referral" element={<ProtectedRoute element={<Referral />} />} />
           <Route path="/tasks" element={<ProtectedRoute element={<Task />} />} />
           <Route path="/wallet" element={<ProtectedRoute element={<Wallet />} />} />
+          <Route path="/fight" element={<ProtectedRoute element={<Fight />} />} />
         </Routes>
       </div>
       <Bottom />

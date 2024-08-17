@@ -1,4 +1,4 @@
-import { width } from "@fortawesome/free-solid-svg-icons/fa0";
+import { NavLink } from "react-router-dom";
 import React, { useState, useEffect, useRef } from "react";
 import coinImag from "../assets/coin.png";
 import Avtar from "../assets/Avtar.png";
@@ -198,6 +198,33 @@ const Home = () => {
                 <div className="text">{energy} / 500 <img src={flash} alt="" /></div>
                 <div className="progress progress-striped">
                     <div className="progress-bar" style={{ width: ((energy / 500) * 100) + '%' }}></div>
+                </div>
+            </div>
+            <div className="list-tile">
+                <div className="title-subtitle">
+                    <div className="title">Choose And Fight Opponents</div>
+                    <div className="subtitle">To earn more rewards</div>
+                </div>
+                <div className="copy-button-bg">
+                    <NavLink to="/fight" className="copy-button"><span>Fight</span></NavLink>
+                </div>
+                <div className="circle top-left">
+                    <img src={coinImag} style={{ width: '100%' }} alt="" />
+                </div>
+                <div className="circle top-right">
+                    <img
+                        src={coinImag}
+                        style={{
+                            width: '100%',
+                            zIndex: 10,
+                            borderRadius: '50%',
+                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)'
+                        }}
+                        alt=""
+                    />
+                </div>
+                <div className="circle middle">
+                    <img src={coinImag} style={{ width: '100%' }} alt="" />
                 </div>
             </div>
         </div>

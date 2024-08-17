@@ -111,7 +111,7 @@
 .progress {
   width: 80%;
   height: 15px;
-  margin: auto;
+  margin: 10px auto;
   /* padding: 6px; */
   background: rgba(0, 0, 0, 0.25);
   border-radius: 6px;
@@ -130,7 +130,6 @@
 }
 
 .pro-bar .text {
-  padding: 15px;
   font-weight: 600;
   text-align: center;
 }
@@ -143,7 +142,7 @@
 .Avtar {
   position: absolute;
   left: auto;
-  bottom: 25px;
+  bottom: 0;
   width: 250px;
 }
 .nav {
@@ -242,6 +241,17 @@
   padding: 10px;
 }
 
+/* some extra start*/
+
+.content {
+  height: 85vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+/* some extra end*/
+
 .Boost {
   background-color: #03C04A;
   height: 35px;
@@ -275,9 +285,9 @@
 }
 
 .center .coinimg {
-  height: 270px;
-  width: 270px;
-  margin: 30px;
+  height: 250px;
+  width: 250px;
+  margin: 20px;
 }
 
 
@@ -310,7 +320,7 @@
 .list-tile {
   position: relative;
   width: 100%;
-  padding: 25px 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -372,6 +382,7 @@
 }
 
 .copy-button {
+  text-decoration: none;
   position: relative;
   border: none;
   border-radius: 12px;
