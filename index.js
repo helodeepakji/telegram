@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 app.use('/', route);
 
 const token = "7222442007:AAHgTzuLS8O1Dgei8krt7yJ19Ii21DG_yI8";
-const web_link = "https://telegram-rp37.onrender.com/auth/";
+const web_link = "https://telegram.softairtechnology.com/auth/";
 let bot = new Telegraf(token);
 
 bot.start((ctx) => {
