@@ -90,7 +90,7 @@
 .container {
   max-width: 430px;
   width: 100%;
-  background-color: #0f0a28;
+  background-color: #2c0f34;
   padding: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -609,3 +609,248 @@ h4 {
   color: green;
   font-weight: 800;
 }
+
+
+
+/* fight screen */
+
+
+
+.box {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: large;
+}
+
+.box2_top {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.coin img {
+    position: relative;
+    height: 47px;
+    margin-left: 60px;
+}
+
+
+
+.center {
+    display: grid;
+    justify-items: center;
+    position: relative;
+}
+
+
+
+.contentfight {
+    background-image: radial-gradient(circle, #f218bf, #230f2e);
+    border-top: 3.5px solid #f704d3;
+}
+
+.level .logo {
+    font-size: 20px;
+    margin-left: 12px;
+}
+
+.level .text {
+    font-weight: 600;
+    margin-top: 4px;
+    color: #fff;
+}
+
+.boxes {
+    display: flex;
+    align-items: center;
+}
+
+.diamond {
+    height: 20px;
+    width: 23px;
+    margin-left: 20px;
+    margin-right: -8px;
+}
+
+.p {
+    margin-top: 10px;
+}
+
+.bolt {
+    display: flex;
+    align-items: center;
+    height: 33px;
+    width: 80px;
+    background-color: #9f2c84;
+}
+
+
+
+.right {
+    height: 55px;
+    margin-left: 30px;
+    margin-top: 70px;
+    margin-bottom: 120px;
+    cursor: pointer;
+}
+
+.fighter {
+    position: absolute;
+    height: 240px;
+    margin-left: 60px;
+}
+
+.left {
+    height: 55px;
+    margin-top: 70px;
+    margin-left: 270px;
+    margin-bottom: 120px;
+    cursor: pointer;
+}
+
+#shadow {
+    margin-top: -80px;
+    margin-left: 58px;
+    border-radius: 50%;
+    width: 295px;
+    height: 150px;
+    background: black;
+    opacity: 0.5;
+    -webkit-filter: blur(10px);
+    -webkit-transform: scale(1, 0.2);
+}
+
+h4 {
+    margin-top: -50px;
+}
+
+.action {
+    display: flex;
+    height: 63px;
+    /* width: 388px; */
+    margin-left: 9px;
+    margin-top: 8px;
+    background-color: #130918;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: 1px solid rgba(207, 207, 207, 0.336);
+}
+
+.circles {
+    background-color: #fff;
+    height: 38px;
+    width: 38x;
+    border-radius: 50%;
+    margin: 10px 0 30px 15px;
+}
+
+.box1 {
+    display: flex;
+}
+
+.box1 img {
+    height: 38px;
+    width: 37px;
+    margin: 0 0 34px 0px;
+}
+
+.box1 h6 {
+    margin: 18px 0 0 4px;
+}
+
+.box2 {
+    height: 17px;
+    width: 17px;
+    display: flex;
+    margin: 23px 0 0 27px;
+}
+
+.box2 p {
+    font-size: small;
+    margin-top: -3px;
+    margin-left: 2px;
+}
+
+.box3 {
+    display: flex;
+    height: 20px;
+    width: 20px;
+    margin: 20px 0 0 50px;
+}
+
+.box3 h6 {
+    margin: 0 0 0 3px;
+}
+
+.box4 {
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 14px 0 0 64px;
+}
+
+.box4 img {
+    height: 30px;
+    width: 30px;
+}
+
+.action1 .box2 {
+    height: 17px;
+    width: 17px;
+    display: flex;
+    margin: 23px 0 0 75px;
+}
+
+.action3 .box2 {
+    height: 17px;
+    width: 17px;
+    display: flex;
+    margin: 23px 0 0 93px;
+}
+
+.bottom-upgrade{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.bottom-upgrade img {
+    height: 63px;
+    width: 130px;
+}
+
+@media (max-width: 320px) {
+    .nav {
+        width: 250px;
+    }
+
+    .boost {
+        margin-left: 10px;
+        margin-top: 15px;
+    }
+
+    .level {
+        margin-left: 10px;
+        margin-top: 15px;
+    }
+
+    .box {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: small;
+    }
+
+    .box2_top {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    .section h6 {
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+}
+
