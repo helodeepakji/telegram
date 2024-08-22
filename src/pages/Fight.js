@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
 import FightImg1 from "../assets/figher.png";
 import FightImg2 from "../assets/figher2.png";
 import FightImg3 from "../assets/fighter3.png";
@@ -147,7 +148,7 @@ const Fight = () => {
       </div>
       <div className="bottom-upgrade">
         <img src={UpgradeImg} alt="" />
-        <img src={FightBtn} alt="" />
+        <NavLink to="/battle"><img src={FightBtn} alt="" /></NavLink>
       </div>
     </div>
   );

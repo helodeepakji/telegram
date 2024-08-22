@@ -5,7 +5,10 @@ const route = require('./router/route');
 const path = require('path');
 const { Telegraf } = require('telegraf');
 const connection = require('./db/connection');
+const { Server } = require('socket.io');
+const http = require('http');
 const port = process.env.PORT || 8000;
+
 
 const viewPath = path.join(__dirname, "/../views");
 const staticPath = path.join(__dirname, "/../static");
@@ -91,6 +94,47 @@ bot.start((ctx) => {
 
 bot.launch();
 
-app.listen(port, () => {
-    console.log(`App is Started at http://127.0.0.1:${port}/`)
+const server = http.createServer(app);
+const io = new Server(server);
+let users = {}; 
+
+io.on('connection', (socket) => {
+    console.log('a user connected:', socket.id);
+
+    // Handle storing the username
+    socket.on('userLogin', (userId) => {
+        users[socket.id] = userId;
+        io.emit('updateUsers', Object.values(users));
+        console.log(users);
+        console.log(userId);
+        
+    });
+
+    
+    // Join a room
+    socket.on('joinRoom', (room) => {
+        socket.join(room);
+        console.log(`${socket.username} joined room: ${room}`);
+    });
+
+    // Send a message to a room
+    socket.on('sendMessage', ({ room, message }) => {
+        io.to(room).emit('receiveMessage', { message, sender: socket.username || socket.id });
+    });
+
+    socket.on('disconnect', () => {
+        delete users[socket.id];
+        io.emit('updateUsers', Object.values(users));
+        console.log('User disconnected');
+        console.log(users);
+    });
+});
+
+// app.listen(port, () => {
+//     console.log(`App is Started at http://127.0.0.1:${port}/`)
+// });
+
+
+server.listen(port, () => {
+    console.log(`App is Started at http://127.0.0.1:${port}/`);
 });

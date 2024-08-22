@@ -10,17 +10,8 @@ route.get('/auth/:username/:id', async (req, res) => {
     req.session.user_id = id;
 
     connection.query('SELECT * FROM users WHERE `user_id` = ?', [id], (error, results, fields) => {
-        if (error) {
-            console.error('Error fetching user:', error);
-            return res.status(500).send('Internal Server Error');
-        }
-
         if (results.length === 0) {
             connection.query('INSERT INTO users (`user_id`, `username`) VALUES (?, ?)', [id, username], (insertError, insertResults, insertFields) => {
-                if (insertError) {
-                    console.error('Error inserting user:', insertError);
-                    return res.status(500).send('Internal Server Error');
-                }
                 console.log('User inserted:', username);
                 req.session.coin = 0;
             });
@@ -54,10 +45,6 @@ route.get('/api/addCoin/:coin', (req, res) => {
     if (req.session.username && req.session.user_id) {
         var user_id = req.session.user_id;
         connection.query('UPDATE `users` SET `coin` = `coin` + 1 WHERE `user_id` = ?', [user_id], (insertError, insertResults, insertFields) => {
-            if (insertError) {
-                console.error('Error inserting user:', insertError);
-                return res.status(500).send('Internal Server Error');
-            }
             console.log('Coin inserted:', coin);
         });
         res.json({ username: req.session.username, id: req.session.user_id });
@@ -75,10 +62,6 @@ route.get('/api/useEnergy/:coin', (req, res) => {
                 var energy = results[0].energy;
                 if(energy > 0){
                     connection.query('UPDATE `users` SET `energy` = `energy` - 1 WHERE `user_id` = ?', [ user_id], (insertError, insertResults, insertFields) => {
-                        if (insertError) {
-                            console.error('Error inserting user:', insertError);
-                            return res.status(500).send('Internal Server Error');
-                        }
                         console.log('Coin inserted:', coin);
                     });
                 }
@@ -99,10 +82,6 @@ route.get('/api/addEnergy/:coin', (req, res) => {
                 var energy = results[0].energy;
                 if(energy < 500){
                     connection.query('UPDATE `users` SET `energy` = `energy` + 1 WHERE `user_id` = ?', [ user_id], (insertError, insertResults, insertFields) => {
-                        if (insertError) {
-                            console.error('Error inserting user:', insertError);
-                            return res.status(500).send('Internal Server Error');
-                        }
                         console.log('Coin inserted:', coin);
                     });
                 }
@@ -118,11 +97,7 @@ route.get('/api/getTask', (req, res) => {
     if (req.session.username && req.session.user_id) {
         const user_id = req.session.user_id;
         connection.query('SELECT * FROM `task` WHERE `is_active` = 1 ORDER BY `created_at` DESC', (error, results) => {
-            if (error) {
-                console.error('Error fetching tasks:', error);
-                return res.status(500).send('Internal Server Error');
-            }
-
+            
             let data = [];
             results.forEach(element => {
                 let users;
