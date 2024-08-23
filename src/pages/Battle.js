@@ -131,7 +131,7 @@ const Battle = () => {
 
                 setOpponentEffect(effect.type);
 
-                if (effect.type === 'lightning'  && fighter1Top == fighter2Top) {
+                if (effect.type === 'lightning' && fighter1Top == fighter2Top) {
                     if (userEffect === 'shield') {
                         // No change in power
                     } else if (userEffect === 'lightning') {
@@ -201,84 +201,86 @@ const Battle = () => {
 
     return (
         <div className="content container-sm contentfight">
-        {isGameOver ? (
-            <div className="game-over-screen">
-                {winner === 'user' ? (
-                    <h1>Congratulations! You Won!</h1>
-                ) : winner === 'opponent' ? (
-                    <h1>You Lost! Better Luck Next Time!</h1>
-                ) : (
-                    <h1>It's a Draw!</h1>
-                )}
-                <button onClick={handleRestart}>Play Again</button>
-            </div>
-        ) : (
-            <div className="inner-box">
-                <div className="first">
-                    <div className="moon-bunny">
-                        <img src={LogoImg} />
-                        <h6>{username}</h6>
+            {isGameOver ? (
+                <div className="game-over-screen">
+                    {winner === 'user' ? (
+                        <h1>Congratulations! You Won!</h1>
+                    ) : winner === 'opponent' ? (
+                        <h1>You Lost! Better Luck Next Time!</h1>
+                    ) : (
+                        <h1>It's a Draw!</h1>
+                    )}
+                    <button onClick={handleRestart}>Play Again</button>
+                </div>
+            ) : (
+                <div className="inner-box">
+                    <div className="first">
+                        <div className="moon-bunny">
+                            <img src={LogoImg} />
+                            <h6>{username}</h6>
+                        </div>
+                        <h2>VS</h2>
+                        <div className="moon-bunny pudgy">
+                            <img src={LogoImg} />
+                            <h6>{username2}</h6>
+                        </div>
                     </div>
-                    <h2>VS</h2>
-                    <div className="moon-bunny pudgy">
-                        <img src={LogoImg} />
-                        <h6>{username2}</h6>
+                    <div className="first">
+                        <div className="progress one">
+                            <div className="progress-bar" style={{ width: `${fighter1Power}%` }}></div>
+                        </div>
+                        <div className="level">
+                            <div className="text">
+                                <p>01:00</p>
+                            </div>
+                        </div>
+                        <div className="progress one two">
+                            <div className="progress-bar" style={{ width: `${fighter2Power}%` }}></div>
+                        </div>
+                    </div>
+                    <div className="fighters">
+                        <div className="fighter1">
+                            <img className="fighter1Img" src={FightImg1} alt="" style={{ top: `${fighter1Top}px`, position: 'relative' }} />
+                            {effects.map((effect) => (
+                                <div key={effect.id} className={effect.type} style={effect.style}></div>
+                            ))}
+                        </div>
+                        <div className="fighter2">
+                            <img className="fighter2Img" src={FightImg2} alt="" style={{ top: `${fighter2Top}px`, position: 'relative' }} />
+                            {socketEffects.map((effect) => (
+                                <div key={effect.id} className={effect.type} style={effect.style}></div>
+                            ))}
+                        </div>
+                    </div>
+                    <div id="shadow"></div>
+                    <div className="circlesBox">
+                        <div className="arrows">
+                            <div className="">
+                                <img className="circle-image move-up" src={UpImg} onClick={moveUp} alt="" />
+                            </div>
+                            <div className="">
+                                <img className="circle-image move-down" src={DownImg} onClick={moveDown} alt="" />
+                            </div>
+                            <div className="">
+                                <button onClick={handleUserReady} disabled={isUserReady}>
+                                    {isUserReady ? "Waiting for Opponent..." : "Ready"}
+                                </button>
+                            </div>
+                        </div>
+                        <div className="others">
+                            <div className="top">
+                                <img id="sparkle" className="circle-image" src={FireImg} alt="" onClick={() => addEffect('lightning')} />
+                            </div>
+                            <div className="middle">
+                                <img className="circle-image" src={RankImg} alt="" onClick={() => addEffect('shield')} />
+                            </div>
+                            <div className="bottom">
+                                <img className="circle-image" src={AttackImg} alt="" />
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="first">
-                    <div className="progress one">
-                        <div className="progress-bar" style={{ width: `${fighter1Power}%` }}></div>
-                    </div>
-                    <div className="level">
-                        <div className="text">
-                            <p>01:00</p>
-                        </div>
-                    </div>
-                    <div className="progress one two">
-                        <div className="progress-bar" style={{ width: `${fighter2Power}%` }}></div>
-                    </div>
-                </div>
-                <div className="fighters">
-                    <div className="fighter1">
-                        <img className="fighter1Img" src={FightImg1} alt="" style={{ top: `${fighter1Top}px`, position: 'relative' }} />
-                        {effects.map((effect) => (
-                            <div key={effect.id} className={effect.type} style={effect.style}></div>
-                        ))}
-                    </div>
-                    <div className="fighter2">
-                        <img className="fighter2Img" src={FightImg2} alt="" style={{ top: `${fighter2Top}px`, position: 'relative' }} />
-                        {socketEffects.map((effect) => (
-                            <div key={effect.id} className={effect.type} style={effect.style}></div>
-                        ))}
-                    </div>
-                </div>
-                <div id="shadow"></div>
-                <div className="circlesBox">
-                    <div className="arrows">
-                        <div className="">
-                            <img className="circle-image move-up" src={UpImg} onClick={moveUp} alt="" />
-                        </div>
-                        <div className="">
-                            <img className="circle-image move-down" src={DownImg} onClick={moveDown} alt="" />
-                        </div>
-                    </div>
-                    <div className="others">
-                        <div className="top">
-                            <img id="sparkle" className="circle-image" src={FireImg} alt="" onClick={() => addEffect('lightning')} />
-                        </div>
-                        <div className="middle">
-                            <img className="circle-image" src={RankImg} alt="" onClick={() => addEffect('shield')} />
-                        </div>
-                        <div className="bottom">
-                            <img className="circle-image" src={AttackImg} alt="" />
-                        </div>
-                    </div>
-                </div>
-                <button onClick={handleUserReady} disabled={isUserReady}>
-                    {isUserReady ? "Waiting for Opponent..." : "Ready"}
-                </button>
-            </div>
-        )};
+            )};
         </div>
     );
 };
