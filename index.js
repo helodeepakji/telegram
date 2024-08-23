@@ -116,7 +116,7 @@ io.on('connection', (socket) => {
 
     // Store the user information
     socket.on('userLogin', ({ userId, username }) => {
-        users[socket.id] = { userId, username };
+        users[socket.id] = { userId, username, isReady: false }; // Add isReady to track readiness
         io.emit('updateUsers', Object.values(users));
         console.log('User logged in:', userId);
     });
@@ -124,9 +124,6 @@ io.on('connection', (socket) => {
     // Handle joining a room
     socket.on('joinFightRoom', (roomName) => {
         const user = users[socket.id];
-        console.log(`Socket ID: ${socket.id}`);
-        console.log(`Users object:`, users);
-        console.log('User:', user);
         if (roomName) {
             socket.join(roomName);
             socket.roomName = roomName;
@@ -136,10 +133,20 @@ io.on('connection', (socket) => {
         }
     });
 
+    // Handle readiness
+    socket.on('userReady', (room) => {
+        if (users[socket.id]) {
+            users[socket.id].isReady = true;
+            console.log(`${users[socket.id].userId} is ready in room ${room}`);
+            
+            // Notify the other user in the room that this user is ready
+            socket.to(room).emit('opponentReady');
+        }
+    });
+
     // Handle fighter movement within a room
     socket.on('moveFighter2', ({ room, newTop }) => {
         const user = users[socket.id];
-        console.log(user);
         io.to(room).emit('moveFighter2', { userid: user.userId, newTop });
         console.log(`Fighter2 moved to: ${newTop} in room: ${room}`);
     });
@@ -147,8 +154,6 @@ io.on('connection', (socket) => {
     // Handle adding effects within a room
     socket.on('addFighterEffect', ({ room, effect }) => {
         const user = users[socket.id];
-        console.log(user);
-
         io.to(room).emit('addFighterEffect', { userid: user.userId, effect });
         console.log(`Effect added in room ${room}:`, effect);
     });
@@ -167,10 +172,6 @@ io.on('connection', (socket) => {
         console.log('Connected users:', users);
     });
 });
-// app.listen(port, () => {
-//     console.log(`App is Started at http://127.0.0.1:${port}/`)
-// });
-
 
 server.listen(port, () => {
     console.log(`App is Started at http://127.0.0.1:${port}/`);
