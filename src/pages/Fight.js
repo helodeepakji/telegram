@@ -52,6 +52,9 @@ const Fight = () => {
     );
   };
 
+  const userId = "user1";  // Replace with actual userId
+  const opponentId = "user2";  // Replace with actual opponentId
+
   return (
     <div className="content container-sm contentfight">
       <div className="section">
@@ -148,7 +151,7 @@ const Fight = () => {
       </div>
       <div className="bottom-upgrade">
         <img src={UpgradeImg} alt="" />
-        <NavLink to="/battle"><img src={FightBtn} alt="" /></NavLink>
+        <NavLink to="/opponet"><img src={FightBtn} alt="" /></NavLink>
       </div>
     </div>
   );

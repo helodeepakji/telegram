@@ -30,6 +30,20 @@ app.use((req, res, next) => {
     res.locals.authenticated = req.session.userId ? true : false;
     next();
 });
+let users = {};
+app.get('/api/online', (req, res) => {
+    const uniqueUsers = [];
+    const seenUserIds = new Set();
+
+    for (const socketId in users) {
+        const user = users[socketId];
+        if (!seenUserIds.has(user.userId)) {
+            seenUserIds.add(user.userId);
+            uniqueUsers.push(user);
+        }
+    }
+    res.json(uniqueUsers);
+});
 
 app.use('/', route);
 
@@ -96,40 +110,63 @@ bot.launch();
 
 const server = http.createServer(app);
 const io = new Server(server);
-let users = {}; 
 
 io.on('connection', (socket) => {
-    console.log('a user connected:', socket.id);
+    console.log('A user connected:', socket.id);
 
-    // Handle storing the username
-    socket.on('userLogin', (userId) => {
-        users[socket.id] = userId;
+    // Store the user information
+    socket.on('userLogin', ({ userId, username }) => {
+        users[socket.id] = { userId, username };
         io.emit('updateUsers', Object.values(users));
-        console.log(users);
-        console.log(userId);
-        
+        console.log('User logged in:', userId);
     });
 
-    
-    // Join a room
-    socket.on('joinRoom', (room) => {
-        socket.join(room);
-        console.log(`${socket.username} joined room: ${room}`);
+    // Handle joining a room
+    socket.on('joinFightRoom', (roomName) => {
+        const user = users[socket.id];
+        console.log(`Socket ID: ${socket.id}`);
+        console.log(`Users object:`, users);
+        console.log('User:', user);
+        if (roomName) {
+            socket.join(roomName);
+            socket.roomName = roomName;
+            console.log(`${user.userId} joined room: ${roomName}`);
+        } else {
+            console.log(`${user.userId} tried to join an undefined room.`);
+        }
     });
 
-    // Send a message to a room
+    // Handle fighter movement within a room
+    socket.on('moveFighter2', ({ room, newTop }) => {
+        const user = users[socket.id];
+        console.log(user);
+        io.to(room).emit('moveFighter2', { userid: user.userId, newTop });
+        console.log(`Fighter2 moved to: ${newTop} in room: ${room}`);
+    });
+
+    // Handle adding effects within a room
+    socket.on('addFighterEffect', ({ room, effect }) => {
+        const user = users[socket.id];
+        console.log(user);
+
+        io.to(room).emit('addFighterEffect', { userid: user.userId, effect });
+        console.log(`Effect added in room ${room}:`, effect);
+    });
+
+    // Handle sending a message to a room
     socket.on('sendMessage', ({ room, message }) => {
-        io.to(room).emit('receiveMessage', { message, sender: socket.username || socket.id });
+        io.to(room).emit('receiveMessage', { message, sender: users[socket.id] || socket.id });
+        console.log(`Message sent to room ${room} from ${users[socket.id]}: ${message}`);
     });
 
+    // Handle user disconnect
     socket.on('disconnect', () => {
+        console.log('User disconnected:', users[socket.id]);
         delete users[socket.id];
         io.emit('updateUsers', Object.values(users));
-        console.log('User disconnected');
-        console.log(users);
+        console.log('Connected users:', users);
     });
 });
-
 // app.listen(port, () => {
 //     console.log(`App is Started at http://127.0.0.1:${port}/`)
 // });

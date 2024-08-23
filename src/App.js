@@ -14,6 +14,7 @@ import Wallet from "./pages/Wallet";
 import Fight from "./pages/Fight";
 import Test from "./pages/Test";
 import Battle from "./pages/Battle";
+import Opponet from "./pages/Opponet";
 
 
 const tele = window.Telegram.WebApp;
@@ -41,7 +42,8 @@ const App = () => {
           <Route path="/tasks" element={<ProtectedRoute element={<Task />} />} />
           <Route path="/wallet" element={<ProtectedRoute element={<Wallet />} />} />
           <Route path="/fight" element={<ProtectedRoute element={<Fight />} />} />
-          <Route path="/battle" element={<ProtectedRoute element={<Battle />} />} />
+          <Route path="/battle" element={<Battle />} />
+          <Route path="/opponet" element={<Opponet />} />
         </Routes>
       </div>
       <Bottom />

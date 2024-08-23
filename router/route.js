@@ -40,6 +40,19 @@ route.get('/username', (req, res) => {
     }
 });
 
+route.get('/getUsername/:id', (req, res) => {
+    const id = req.params.id;
+    if (id) {
+        connection.query('SELECT * FROM users WHERE `user_id` = ?', [id], (error, results, fields) => {
+            if (results) {
+                res.json(results[0]);
+            }
+        });
+    } else {
+        res.send('No id data found');
+    }
+});
+
 route.get('/api/addCoin/:coin', (req, res) => {
     const coin = req.params.coin;
     if (req.session.username && req.session.user_id) {
