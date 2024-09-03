@@ -132,8 +132,6 @@ route.get('/api/getTask', (req, res) => {
 
             res.json(data);
         });
-    } else {
-        res.status(401).send('No session data found');
     }
 });
 
@@ -143,14 +141,6 @@ route.get('/api/donTask/:id', (req, res) => {
         var user_id = req.session.user_id;
 
         connection.query('SELECT * FROM `task` WHERE `id` = ?', [id], (fetchError, results) => {
-            if (fetchError) {
-                console.error('Error fetching task:', fetchError);
-                return res.status(500).send('Error fetching task');
-            }
-
-            if (results.length === 0) {
-                return res.status(404).send('Task not found');
-            }
 
             let task = results[0];
             let users;
@@ -168,19 +158,10 @@ route.get('/api/donTask/:id', (req, res) => {
 
                 // Update the task with the new users array
                 connection.query('UPDATE `task` SET `users` = ? WHERE `id` = ?', [JSON.stringify(users), id], (updateError, updateResults) => {
-                    if (updateError) {
-                        console.error('Error updating task:', updateError);
-                        return res.status(500).send('Error updating task');
-                    }
-
                     // add user coin
 
                     const coin = task.coin; // Assuming task.coin contains the coin value to be added
                     connection.query('UPDATE `users` SET `coin` = coin + ? WHERE `user_id` = ?', [coin, user_id], (coinUpdateError, coinUpdateResults) => {
-                        if (coinUpdateError) {
-                            console.error('Error updating user coins:', coinUpdateError);
-                            return res.status(500).send('Error updating user coins');
-                        }
 
                         return res.json({ username: req.session.username, id: user_id, coins: coin });
                     });
@@ -188,10 +169,6 @@ route.get('/api/donTask/:id', (req, res) => {
 
                     // update wallet
                     connection.query('INSERT INTO `wallet`(`user_id`, `coin`, `type`, `title`) VALUES (? , ? , ? , ?)', [user_id , coin , 'Task Complete' , task.id], (coinUpdateError, coinUpdateResults) => {
-                        if (coinUpdateError) {
-                            console.error('Error updating user coins:', coinUpdateError);
-                            return res.status(500).send('Error updating user coins');
-                        }
                     });
 
 
@@ -221,16 +198,9 @@ route.get('/api/getTopReferral', (req, res) => {
         // });
         
         connection.query(`SELECT wallet.coin , users.username FROM wallet JOIN users ON wallet.title = users.user_id WHERE wallet.type = 'Referral' AND wallet.user_id = ?`, [user_id] ,(error, results) => {
-            if (error) {
-                console.error('Error fetching tasks:', error);
-                return res.status(500).send('Internal Server Error');
-            }
-        
             res.json(results);
         });
         
-    } else {
-        res.status(401).send('No session data found');
     }
 });
 
