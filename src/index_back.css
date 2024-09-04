@@ -467,7 +467,7 @@ h4 {
   text-align: center;
   color: #fff;
   font-size: 24px;
-  /* margin: 34px 0 20px 0; */
+  margin: 34px 0 20px 0;
 }
 
 .referral-card {
@@ -703,7 +703,7 @@ h4 {
 .right {
   height: 55px;
   margin-left: 30px;
-  /* margin-top: 70px; */
+  margin-top: 70px;
   margin-bottom: 120px;
   cursor: pointer;
 }
@@ -716,7 +716,7 @@ h4 {
 
 .left {
   height: 55px;
-  
+  margin-top: 70px;
   margin-left: 270px;
   margin-bottom: 120px;
   cursor: pointer;
@@ -724,7 +724,7 @@ h4 {
 
 #shadow {
   margin-top: -80px;
-  /* margin-left: 58px; */
+  margin-left: 58px;
   border-radius: 50%;
   width: 295px;
   height: 150px;
@@ -835,60 +835,6 @@ h4 {
 .bottom-upgrade img {
   height: 63px;
   width: 130px;
-}
-@media(max-width:360px){
-  .menu{
-    height: 150px;
-    margin-top: 30px;
-  }
-  .action{
-    height: 51px;
-  }
-
-  h4{
-    margin-top: -32px;
-    font-size: 20px;
-  }
-  .bottom-upgrade img{
-    height: 50px;
-    width: 110px;
-  }
-  #shadow{
-    height: 133px;
-    
-  }
-.center{
-  height:200px;
-  bottom: 45px;
- 
-}
-.Avtar{
-  width: 200px;
-  bottom: -57px;
-}
-.center .coinimg{
-  height: 210px;
-  width: 210px;
-}
-.coin img{
-  height: 40px;
-}
-.level{
-  height: 33px;
-  width: 82px;
-}
-.fighter{
-  height: 200px;
-  top: 68px;
-}
-.Boost{
-  height: 31px;
-  width: 74px;
-}
-.level{
-  height: 30px;
-  width: 72px;
-}
 }
 
 @media (max-width: 320px) {
