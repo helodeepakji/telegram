@@ -4,7 +4,7 @@ const path = require('path');
 const route = express.Router();
 
 route.get('/auth/:username/:id', async (req, res) => {
-    const username = req.params.username;
+    const username = req.params.username ?? 'User';
     const id = req.params.id;
     req.session.username = username;
     req.session.user_id = id;
