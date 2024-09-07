@@ -73,7 +73,7 @@ const Fight = () => {
         <div className="boxes">
           <div className="Boost">
             <img className="coin" src={flash} alt="" style={{ width: '30px' }} />
-            <p>2/6</p>
+            <p>6/6</p>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ const Fight = () => {
           <i className="fa-solid fa-bolt"></i>
         </div>
         <div className="text">
-          <p>LVL 6</p>
+          <p>LVL 1</p>
         </div>
       </div>
       <div className="menu">
