@@ -81,7 +81,6 @@ const InviteFriends = () => {
           <img src={coinImage} style={{ width: '100%' }} alt="" />
         </div>
       </div>
-      <h4>Top Referrals</h4>
 
       {referral.map(task => (
       <div className="profile-card">
@@ -97,7 +96,7 @@ const InviteFriends = () => {
       </div>
       ))}
 
-      <h4><span style={{ color: '#ffc227' }}>0</span> Referrals Yet</h4>
+      <h4 style={{marginTop: '10px'}}><span style={{ color: '#ffc227' }}>0</span> Referrals Yet</h4>
       <div className="referral-card">
         <img src={coinImage} className="referral-card-coin-left" alt="Coin" />
         <div className="referral-card-content">

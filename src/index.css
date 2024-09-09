@@ -5,10 +5,12 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  background: linear-gradient(to bottom,
-      rgba(82, 64, 105) 30%,
-      rgba(82, 64, 105) 60%,
-      rgba(41, 25, 66) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(82, 64, 105) 30%,
+    rgba(82, 64, 105) 60%,
+    rgba(41, 25, 66) 100%
+  );
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,10 +37,12 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
-  background: linear-gradient(to bottom,
-      rgba(82, 64, 105) 30%,
-      rgba(82, 64, 105) 60%,
-      rgba(41, 25, 66) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(82, 64, 105) 30%,
+    rgba(82, 64, 105) 60%,
+    rgba(41, 25, 66) 100%
+  );
   border-radius: 10px;
   color: rgba(255, 255, 255, 1);
 }
@@ -65,7 +69,6 @@
   color: #ffc227;
 }
 
-
 /* Home Css */
 
 @keyframes append-animate {
@@ -83,10 +86,9 @@
 /* animate new box */
 .new-earnpoint {
   position: absolute;
-  animation: append-animate .1s linear;
+  animation: append-animate 0.1s linear;
   color: lightgreen;
 }
-
 
 .container {
   max-width: 430px;
@@ -108,7 +110,6 @@
   padding: 20px;
 }
 
-
 .progress {
   width: 80%;
   height: 15px;
@@ -116,13 +117,23 @@
   /* padding: 6px; */
   background: rgba(0, 0, 0, 0.25);
   border-radius: 6px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
+    0 1px rgba(255, 255, 255, 0.08);
   border-radius: 10px;
 }
 
 .progress-striped .progress-bar {
-  background-color: #FCBC51;
-  background-image: linear-gradient(45deg, rgb(252, 163, 17) 25%, transparent 25%, transparent 50%, rgb(252, 163, 17) 50%, rgb(252, 163, 17) 75%, transparent 75%, transparent);
+  background-color: #fcbc51;
+  background-image: linear-gradient(
+    45deg,
+    rgb(252, 163, 17) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgb(252, 163, 17) 50%,
+    rgb(252, 163, 17) 75%,
+    transparent 75%,
+    transparent
+  );
 }
 
 .pro-bar {
@@ -163,7 +174,6 @@
   margin-left: 40px;
 }
 
-
 #shadow {
   margin-top: -135px;
   border-radius: 50%;
@@ -175,24 +185,21 @@
   -webkit-transform: scale(1, 0.2);
 }
 
-
 .level {
   display: flex;
   align-items: center;
-  height: 40px;
-  width: 90px;
+  justify-content: center;
   opacity: 0.8;
-  border-top: 3px solid #582176;
-  border-radius: 18px;
-  border-bottom: 1.9px solid #2e0f28;
+  border: 3px solid #582176;
+  border-radius: 50px;
   color: #fff;
   margin-left: 8px;
+  padding: 0;
 }
 
 .level p {
   font-size: small;
   font-weight: bolder;
-  margin-left: 3px;
   margin-top: 10px;
 }
 
@@ -212,7 +219,6 @@
   color: #fff;
   text-align: center;
 }
-
 
 .section {
   display: flex;
@@ -257,20 +263,26 @@
 /* some extra end*/
 
 .Boost {
-  background-color: #03C04A;
-  height: 35px;
-  width: 86px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
+  background-color: #03c04a;
+  border-radius: 50px;
   color: #fff;
+  width: 100%;
+  height: 100%;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 12px;
 }
 
 .Boost p {
   font-weight: bolder;
-  margin-left: 2px;
-  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.Boost img {
+  height: 20px;
+  width: auto;
 }
 
 .Boost i {
@@ -293,7 +305,6 @@
   width: 250px;
   margin: 20px;
 }
-
 
 /* referral */
 .header-container {
@@ -335,6 +346,7 @@
   overflow: hidden;
   background: linear-gradient(to left, #693c94, #d997fe, #693c94);
   border-radius: 25px;
+  margin-bottom: 30px;
 }
 
 .title-subtitle {
@@ -426,10 +438,12 @@
   display: flex;
   align-items: center;
   padding: 10px 18px;
-  background: linear-gradient(to bottom,
-      rgba(82, 64, 105, 0.8) 30%,
-      rgba(82, 64, 105, 0.8) 60%,
-      rgba(41, 25, 66, 0.8) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(82, 64, 105, 0.8) 30%,
+    rgba(82, 64, 105, 0.8) 60%,
+    rgba(41, 25, 66, 0.8) 100%
+  );
   border-radius: 30px;
 }
 
@@ -481,8 +495,7 @@ h4 {
   border-radius: 25px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  margin: auto;
-  margin-bottom: 15px;
+  margin: 20px auto;
 }
 
 .referral-card-coin-left {
@@ -525,8 +538,8 @@ h4 {
 /* wallet */
 
 .coming_soon {
-  background-color: #FFA500;
-  border: 2px solid #D99A22;
+  background-color: #ffa500;
+  border: 2px solid #d99a22;
   border-radius: 25px;
   color: white;
   padding: 10px 20px;
@@ -538,7 +551,6 @@ h4 {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 
 /* tasks */
 
@@ -588,11 +600,9 @@ h4 {
   font-size: 16px;
 }
 
-
 .myrank {
   background: linear-gradient(180deg, #f84646cc 30%, #ff0000cc 60%, #a08b8bcc);
 }
-
 
 /* animation */
 
@@ -625,11 +635,7 @@ h4 {
   z-index: 99999;
 }
 
-
-
 /* fight screen */
-
-
 
 .box {
   margin-left: 10px;
@@ -648,19 +654,16 @@ h4 {
   margin-left: 60px;
 }
 
-
-
 .center {
   display: grid;
   justify-items: center;
   position: relative;
 }
 
-
-
 .contentfight {
   background-image: radial-gradient(circle, #f218bf, #230f2e);
   border-top: 3.5px solid #f704d3;
+  padding: 32px;
 }
 
 .level .logo {
@@ -693,38 +696,27 @@ h4 {
 .bolt {
   display: flex;
   align-items: center;
-  height: 33px;
   width: 80px;
   background-color: #9f2c84;
 }
 
-
-
 .right {
   height: 55px;
-  margin-left: 30px;
   /* margin-top: 70px; */
-  margin-bottom: 120px;
   cursor: pointer;
 }
 
 .fighter {
-  position: absolute;
   height: 240px;
-  margin-left: 60px;
+  z-index: 10;
 }
 
 .left {
   height: 55px;
-  
-  margin-left: 270px;
-  margin-bottom: 120px;
   cursor: pointer;
 }
 
 #shadow {
-  margin-top: -80px;
-  /* margin-left: 58px; */
   border-radius: 50%;
   width: 295px;
   height: 150px;
@@ -740,16 +732,13 @@ h4 {
 
 .action {
   display: flex;
-  height: 63px;
-  /* width: 388px; */
-  margin-left: 9px;
-  margin-top: 8px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
   background-color: #130918;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-radius: 50px;
   border: 1px solid rgba(207, 207, 207, 0.336);
+  margin-bottom: 8px;
 }
 
 .circles {
@@ -757,41 +746,40 @@ h4 {
   height: 38px;
   width: 38x;
   border-radius: 50%;
-  margin: 10px 0 30px 15px;
 }
 
 .box1 {
   display: flex;
+  align-items: center;
 }
 
 .box1 img {
   height: 38px;
-  width: 37px;
-  margin: 0 0 34px 0px;
 }
 
 .box1 h6 {
-  margin: 18px 0 0 4px;
+  margin-left: 8px;
+  marigin-bottom: 0;
+  font-size: 14px;
 }
 
 .box2 {
   height: 17px;
   width: 17px;
   display: flex;
-  margin: 23px 0 0 27px;
+  align-items: center;
+  justify-content: center;
 }
 
 .box2 p {
-  font-size: small;
-  margin-top: -3px;
-  margin-left: 2px;
+  margin-left: 8px;
+  margin-top: 16px;
 }
 
 .box3 {
   display: flex;
   height: 20px;
   width: 20px;
-  margin: 20px 0 0 50px;
 }
 
 .box3 h6 {
@@ -803,26 +791,11 @@ h4 {
   width: 30px;
   background-color: #fff;
   border-radius: 50%;
-  margin: 14px 0 0 64px;
 }
 
 .box4 img {
   height: 30px;
   width: 30px;
-}
-
-.action1 .box2 {
-  height: 17px;
-  width: 17px;
-  display: flex;
-  margin: 23px 0 0 75px;
-}
-
-.action3 .box2 {
-  height: 17px;
-  width: 17px;
-  display: flex;
-  margin: 23px 0 0 93px;
 }
 
 .bottom-upgrade {
@@ -836,59 +809,69 @@ h4 {
   height: 63px;
   width: 130px;
 }
-@media(max-width:360px){
-  .menu{
+
+.menu {
+  position: relative;
+}
+
+.shadow-fighter {
+  position: absolute;
+  bottom: 0;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 360px) {
+  .menu {
     height: 150px;
     margin-top: 30px;
   }
-  .action{
+  .action {
     height: 51px;
   }
 
-  h4{
+  h4 {
     margin-top: -32px;
     font-size: 20px;
   }
-  .bottom-upgrade img{
+  .bottom-upgrade img {
     height: 50px;
     width: 110px;
   }
-  #shadow{
+  #shadow {
     height: 133px;
-    
   }
-.center{
-  height:200px;
-  bottom: 45px;
- 
-}
-.Avtar{
-  width: 200px;
-  bottom: -57px;
-}
-.center .coinimg{
-  height: 210px;
-  width: 210px;
-}
-.coin img{
-  height: 40px;
-}
-.level{
-  height: 33px;
-  width: 82px;
-}
-.fighter{
-  height: 200px;
-  top: 68px;
-}
-.Boost{
-  height: 31px;
-  width: 74px;
-}
-.level{
-  height: 30px;
-  width: 72px;
-}
+  .center {
+    height: 200px;
+    bottom: 45px;
+  }
+  .Avtar {
+    width: 200px;
+    bottom: -57px;
+  }
+  .center .coinimg {
+    height: 210px;
+    width: 210px;
+  }
+  .coin img {
+    height: 40px;
+  }
+  .level {
+    height: 33px;
+    width: 82px;
+  }
+  .fighter {
+    height: 200px;
+    top: 68px;
+  }
+  .Boost {
+    display: flex;
+    height: 31px;
+    width: 74px;
+  }
+  .level {
+    height: 30px;
+    width: 72px;
+  }
 }
 
 @media (max-width: 320px) {
@@ -923,9 +906,7 @@ h4 {
   }
 }
 
-
 /* fighter */
-
 
 .inner-box {
   margin-left: -8px;
@@ -933,7 +914,8 @@ h4 {
   height: 698px;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("https://img.freepik.com/free-vector/night-starry-sky-background_23-2148052059.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url('https://img.freepik.com/free-vector/night-starry-sky-background_23-2148052059.jpg');
   background-size: cover;
   padding: 20px;
 }
@@ -966,7 +948,8 @@ h4 {
   transition: top 0.2s ease;
 }
 
-.fighter1 img, .fighter2 img {
+.fighter1 img,
+.fighter2 img {
   height: 250px;
 }
 
@@ -1007,7 +990,8 @@ h4 {
   background-image: url('./assets/shield.png');
   background-size: cover;
   pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.5s ease, left 0.5s ease, top 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease, left 0.5s ease,
+    top 0.5s ease;
   z-index: 10;
 }
 
@@ -1015,7 +999,6 @@ h4 {
   opacity: 1;
   transform: scale(1);
 }
-
 
 @keyframes anim {
   0% {

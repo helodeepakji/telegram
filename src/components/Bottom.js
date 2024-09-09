@@ -30,9 +30,9 @@ const Bottom = () => {
                         <span>Tasks</span>
                     </NavLink>
                 </div>
-                <div className="nav-item-div">
+                <div className="nav-item-div" style={{display: 'flex'}}>
                     <NavLink to="/wallet" className="nav-item" activeClassName="selected" exact>
-                        <img src={coinImag} alt="Wallet" style={{ width: '20px' }} />
+                        <img src={coinImag}  alt="Wallet" style={{ width: '20px', marginBottom: '6px' }} />
                         <span>Wallet</span>
                     </NavLink>
                 </div>
