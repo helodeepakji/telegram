@@ -11,7 +11,7 @@ import AttackImg from '../assets/circle3.png'
 import { io } from 'socket.io-client'
 
 // const socket = io('https://127.0.0.1:8000/')
-const socket = io('https://telegram.softairtechnology.com')
+const socket = io('https://telegram.softairtechnology.com');
 
 const Battle = () => {
   const location = useLocation()
@@ -343,4 +343,4 @@ const Battle = () => {
   )
 }
 
-export default Battle
+export default Battle;
