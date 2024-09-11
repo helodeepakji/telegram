@@ -52,7 +52,7 @@ const InviteFriends = () => {
           <img src={coinImage} alt="Coin" className="coin-img" />
           <h1 className="heading-primary">{earned}</h1>
         </div>
-        <h2>Invite Friends</h2>
+        <h2 style={{margin: '0px', marginBottom: '10px'}}>Invite Friends</h2>
       </div>
       <div className="list-tile">
         <div className="title-subtitle">

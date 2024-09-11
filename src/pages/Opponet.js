@@ -39,7 +39,7 @@ const Opponet = () => {
     let i = 0;
 
     return (
-        <div className="container" style={{ padding: '10px', marginBottom: '100px' }}>
+        <div className="container" style={{ padding: '10px', marginBottom: '100px', minHeight: '100vh' }}>
             <div className="header-container">
                 <div className="header">
                     <h1 className="heading-primary">Add Opponet</h1>

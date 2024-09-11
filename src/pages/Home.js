@@ -137,6 +137,7 @@ const Home = () => {
         return 0
       }
     })
+
     setEarned((prev) => {
       const newEarned = prev + 1
       debouncedAddCoin(newEarned)
@@ -161,7 +162,7 @@ const Home = () => {
   const [isScaled, setIsScaled] = useState(false)
 
   return (
-    <div className='content container-sm' style={{ minHeight: '100vh' }}>
+    <div style={{ margin: '16px' }}>
       <div className='section'>
         <div className='moon-bunny'>
           <img src={LogoImg} alt='' />
@@ -210,10 +211,10 @@ const Home = () => {
           className='coinimg'
           alt=''
           onClick={handleClick}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: 'pointer', width: '180px', height: '180px' }}
         />
         <div
-          style={{ zIndex: 0, position: 'absolute', bottom: '-20%' }}
+          style={{ zIndex: 0, position: 'absolute', bottom: '-24%' }}
           id='shadow'
         ></div>
         <img
@@ -221,7 +222,7 @@ const Home = () => {
           className='Avtar'
           alt=''
           onClick={handleClick}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: 'pointer', width: '150px' }}
         />
       </div>
 
@@ -237,9 +238,14 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='list-tile'>
+      <div
+        className='list-tile'
+        style={{ marginBottom: '150px', marginTop: '15px' }}
+      >
         <div className='title-subtitle'>
-          <div className='title'>Choose And Fight Opponents</div>
+          <div className='title' style={{ lineHeight: '1' }}>
+            Choose And Fight Opponents
+          </div>
           <div className='subtitle'>To earn more rewards</div>
         </div>
         <div className='copy-button-bg'>
