@@ -663,7 +663,7 @@ h4 {
 .contentfight {
   background-image: radial-gradient(circle, #f218bf, #230f2e);
   border-top: 3.5px solid #f704d3;
-  padding: 32px;
+  /* padding: 32px; */
 }
 
 .level .logo {
