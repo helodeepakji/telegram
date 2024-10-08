@@ -253,12 +253,11 @@
 
 /* some extra start*/
 
-.content {
-  height: 85vh;
+/* .content {
   display: grid;
   align-items: center;
   justify-content: center;
-}
+} */
 
 /* some extra end*/
 
@@ -610,6 +609,7 @@ h4 {
   transform: scale(0.9);
 }
 
+/*
 @keyframes fadeUp {
   0% {
     opacity: 1;
@@ -633,7 +633,28 @@ h4 {
   color: green;
   font-weight: 800;
   z-index: 99999;
+} */
+
+.new-earnpoint {
+  position: absolute;
+  font-size: 24px;
+  color: white; /* Change color to white */
+  opacity: 1;
+  animation: moveUpFadeOut 1s ease forwards; /* Apply the animation */
+  pointer-events: none; /* Disable pointer events */
 }
+
+@keyframes moveUpFadeOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px); /* Move up by 100px */
+    opacity: 0; /* Fade out */
+  }
+}
+
 
 /* fight screen */
 
