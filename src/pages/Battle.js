@@ -338,7 +338,6 @@ const Battle = () => {
           </div>
         </div>
       )}
-      ;
     </div>
   )
 }
