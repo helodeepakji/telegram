@@ -248,7 +248,7 @@
   border-top: 3.5px solid #451062;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
-  padding: 10px;
+  padding: 0;
 }
 
 /* some extra start*/
@@ -931,7 +931,7 @@ h4 {
 
 .inner-box {
   margin-left: -8px;
-  width: 425px;
+  /* width: 425px; */
   height: 698px;
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
