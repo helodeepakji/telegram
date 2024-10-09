@@ -971,7 +971,7 @@ h4 {
 
 .fighter1 img,
 .fighter2 img {
-  height: 250px;
+  height: 25vh;
 }
 
 .fighter2 {
@@ -1048,12 +1048,13 @@ h4 {
 
 .inner-box .circlesBox {
   display: flex;
+  justify-content: space-between;
 }
 
-.others {
+/* .others {
   margin-left: 250px;
   margin-top: -22px;
-}
+} */
 
 .circle-image {
   height: 37px;
